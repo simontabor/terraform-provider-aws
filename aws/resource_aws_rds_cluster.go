@@ -464,6 +464,10 @@ func resourceAwsRDSClusterCreate(d *schema.ResourceData, meta interface{}) error
 		if _, ok := d.GetOk("backup_retention_period"); ok {
 			clusterUpdate = true
 		}
+		
+		if _, ok := d.GetOk("master_password"); ok {
+			clusterUpdate = true
+		}
 
 		log.Printf("[DEBUG] RDS Cluster restore from snapshot configuration: %s", opts)
 		err := resource.Retry(1*time.Minute, func() *resource.RetryError {
